@@ -7,14 +7,33 @@ const Dashboard = () => {
   const token = localStorage.getItem("github_token");
 
   useEffect(() => {
-    if (token) {
-      fetch("https://api.github.com/user/repos", {
-        headers: { Authorization: `token ${token}` },
-      })
-        .then((res) => res.json())
-        .then((data) => setRepos(data));
-    }
-  }, [token]);
+  if (token) {
+    const query = `
+      {
+        viewer {
+          repositories(first: 100) {
+            nodes {
+              id
+              name
+            }
+          }
+        }
+      }
+    `;
+
+    fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ query })
+    })
+      .then((res) => res.json())
+      .then((data) => setRepos(data.data.viewer.repositories.nodes))
+      .catch((error) => console.error("Error fetching repositories:", error));
+  }
+}, [token]);
 
   const toggleFavorite = (repo) => {
     const updatedFavorites = favorites.includes(repo.id)
@@ -34,9 +53,11 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard</h2>
+      {!token && (
       <button onClick={handleGitHubLogin}>
         <FaDiscord size={30} /> Log into GitHub
-      </button>
+      </button> 
+      )}
       <h3>Repositories</h3>
       <ul>
         {repos.map((repo) => (
