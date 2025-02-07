@@ -1,6 +1,12 @@
 # Summary
 Simple React + Express app that connects to github to show a list of your available repositories through OAuth and githubs graphql API.
 
+## setting up
+go into developer settings on github, create the app and obtain your client id and client secret, set the callback route
+
+![imagen](https://github.com/user-attachments/assets/7d3de57c-4bbf-4e95-97eb-363ab900346c)
+
+
 ## Installation
 front end, on the root folder:
 ```
@@ -13,6 +19,7 @@ backend, on the server folder:
 npm install
 fill the values with your credentials on the .env.example and remove example
 ```
+
 
 ## screenshots
 sign up
