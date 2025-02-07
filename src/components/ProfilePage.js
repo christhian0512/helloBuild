@@ -13,7 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
 
-const Dashboard = () => {
+const ProfilePage = () => {
   const [repos, setRepos] = useState([]);
   const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem("favorites")) || []);
   const [searchTerm, setSearchTerm] = useState("");
@@ -80,7 +80,7 @@ const Dashboard = () => {
 
   return (
     <Box>
-      <h2>Dashboard</h2>
+      <h2>Profile</h2>
           {!token && (
           <Button  variant="contained" onClick={handleGitHubLogin} startIcon={<FaGithub size={20}/>}>
             Connect Github
@@ -147,4 +147,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default ProfilePage;

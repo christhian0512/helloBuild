@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
+import ProfilePage from "./components/ProfilePage";
 import './styles.css';
 
 const OAuthHandler = () => {
@@ -18,7 +18,7 @@ const OAuthHandler = () => {
         .then((data) => {
           if (data.access_token) {
             localStorage.setItem("github_token", data.access_token);
-            navigate("/dashboard");
+            navigate("/profilePage");
           }
         })
         .catch((error) => console.error("Error fetching GitHub token:", error));
@@ -38,8 +38,8 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route
-          path="/dashboard"
-          element={user || localStorage.getItem("github_token") ? <Dashboard /> : <Navigate to="/login" />}
+          path="/profilePage"
+          element={user || localStorage.getItem("github_token") ? <ProfilePage /> : <Navigate to="/login" />}
         />
         <Route path="*" element={<Navigate to="/signup" />} />
       </Routes>

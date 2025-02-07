@@ -32,7 +32,7 @@ const SignUp = () => {
             justifyContent: "flex-start",
             alignItems: "flex-start",
           }}>
-        <TextField variant="outlined" size="small" label="Username" type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+          <TextField variant="outlined" size="small" label="Username" type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
           <TextField variant="outlined" size="small" label="Password" type="password"  value={password} onChange={(event) => setPassword(event.target.value)} />
           <Button variant="contained" onClick={handleSignUp}>Sign Up</Button>
         </Stack>

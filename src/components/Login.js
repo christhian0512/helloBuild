@@ -14,7 +14,7 @@ const Login = ({ setUser }) => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser && storedUser.username === username && storedUser.password === password) {
       setUser(storedUser);
-      navigate("/dashboard");
+      navigate("/profilePage");
     } else {
       alert("Invalid credentials");
     }
@@ -29,10 +29,17 @@ const Login = ({ setUser }) => {
           }}
         >
       <Box sx={{ p: 2, border: 1, boxShadow: 6, borderColor: 'divider', borderRadius: 1, backgroundColor: '#b6d9f0' }}>
-      <h2>Login</h2>
-      <TextField variant="outlined" size="small" label="Username"type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
-      <TextField variant="outlined" size="small" label="Username" type="password"  value={password} onChange={(event) => setPassword(event.target.value)} />
-      <Button variant="contained" onClick={handleLogin}>Login</Button>
+        <h2>Login</h2>
+        <Stack spacing={2}
+          direction="row"
+          sx={{
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+          }}>
+          <TextField variant="outlined" size="small" label="Username"type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+          <TextField variant="outlined" size="small" label="Username" type="password"  value={password} onChange={(event) => setPassword(event.target.value)} />
+          <Button variant="contained" onClick={handleLogin}>Login</Button>
+        </Stack>
       </Box>
     </Stack>
   );
