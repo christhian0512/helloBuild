@@ -1,6 +1,6 @@
 {
   "name": "hellobuild.dev",
-  "version": "0.0.1",
+  "version": "0.9.0",
   "main": "/src/index.js",
   "scripts": {
     "start": "react-scripts start",
@@ -9,6 +9,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@fontsource/roboto": "^5.1.1",
