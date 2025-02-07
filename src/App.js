@@ -5,7 +5,7 @@ import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import './styles.css';
 
-const OAuthHandler = ({ setUser }) => {
+const OAuthHandler = () => {
   const navigate = useNavigate();
 
   useEffect(() => {

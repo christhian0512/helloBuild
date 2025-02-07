@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -12,12 +16,14 @@ const SignUp = () => {
   };
 
   return (
-    <div>
+    <Box>
       <h2>Sign Up</h2>
-      <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button onClick={handleSignUp}>Sign Up</button>
-    </div>
+
+        <TextField variant="outlined" size="small" label="Username" type="text" placeholder="Username" value={username} onChange={(event) => setUsername(event.target.value)} />
+        <TextField variant="outlined" size="small" label="Password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+        <Button variant="contained" onClick={handleSignUp}>Sign Up</Button>
+
+    </Box>
   );
 };
 

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { FaDiscord } from "react-icons/fa";
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 const Dashboard = () => {
   const [repos, setRepos] = useState([]);
   const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem("favorites")) || []);
+  const [searchTerm, setSearchTerm] = useState("");
   const token = localStorage.getItem("github_token");
 
   useEffect(() => {
@@ -50,25 +56,54 @@ const Dashboard = () => {
 
   };
 
+  const handleSearch = event => {
+    setSearchTerm(event.target.value);
+  };
+
+  const results = !searchTerm
+  ? repos
+  : repos.filter(repo =>
+      repo.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+    );
+
+  const favoriteRepos = favorites
+  ? repos.filter(repo =>
+      favorites.includes(repo.id)
+    ): [];
+
+    console.log(favoriteRepos);
+
   return (
     <div>
       <h2>Dashboard</h2>
       {!token && (
-      <button onClick={handleGitHubLogin}>
+      <Button  variant="contained" onClick={handleGitHubLogin}>
         <FaDiscord size={30} /> Log into GitHub
-      </button> 
+      </Button> 
       )}
-      <h3>Repositories</h3>
-      <ul>
-        {repos.map((repo) => (
-          <li key={repo.id}>
-            {repo.name}
-            <button onClick={() => toggleFavorite(repo)}>
-              {favorites.includes(repo.id) ? "Unfavorite" : "Favorite"}
-            </button>
-          </li>
-        ))}
-      </ul>
+      {token && (
+        <>
+          <h3>Repositories</h3>
+          <TextField
+            variant="outlined"
+            size="small"
+            type="text"
+            placeholder="search"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+          <List>
+            {results.map((repo) => (
+              <ListItem key={repo.id}>
+                {repo.name}
+                <Button variant="outlined" onClick={() => toggleFavorite(repo)}>
+                  {favorites.includes(repo.id) ? "Unfavorite" : "Favorite"}
+                </Button>
+              </ListItem>
+            ))}
+          </List>
+        </>
+      )}
     </div>
   );
 };
